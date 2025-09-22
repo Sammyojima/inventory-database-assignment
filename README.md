@@ -1,22 +1,44 @@
-# Inventory Database Schema
+🛒 Inventory Database Management System
+📌 Project Overview
 
-## 📌 Project Overview
-This project is part of my Database Assignment.  
-It contains a relational database schema for an **Inventory Management System**, designed using MySQL.
+This project is a relational database schema for an Inventory Management System, implemented in MySQL.
+It was created as part of a database design assignment, focusing on normalization, constraints, and relationships to ensure data integrity and efficiency.
 
-The schema defines tables, relationships, and constraints needed to manage inventory, suppliers, customers, and orders.
+📂 Schema Description
 
----
+The database schema includes the following tables:
 
-## 🗄️ Database Schema
-The database contains the following tables:
-- **Suppliers** → Stores supplier details.
-- **Products** → Contains product information and stock.
-- **Customers** → Stores customer details.
-- **Orders** → Tracks customer orders.
-- **Order_Items** → Links products to orders (Many-to-Many).
+products → Stores product details (SKU, name, price, stock quantity).
 
----
+suppliers → Contains supplier information.
+
+customers → Stores customer details.
+
+orders → Tracks orders placed by customers.
+
+order_items → Line items for each order (quantity, price, linked to products).
+
+product_suppliers → Resolves the many-to-many relationship between products and suppliers.
+
+🔑 Constraints & Relationships
+
+PRIMARY KEY on every table (e.g., product_id, supplier_id, order_id).
+
+FOREIGN KEY constraints for relationships:
+
+orders.customer_id → customers.customer_id
+
+order_items.order_id → orders.order_id
+
+order_items.product_id → products.product_id
+
+product_suppliers.product_id → products.product_id
+
+product_suppliers.supplier_id → suppliers.supplier_id
+
+NOT NULL constraints to enforce required fields.
+
+UNIQUE constraint on products.sku to prevent duplicate product codes.
 
 ## ⚙️ How to Run
 
@@ -32,15 +54,17 @@ The database contains the following tables:
     SOURCE inventory_schema.sql;
 
 
-**Verify the database:**
+📝 Notes
 
-SHOW DATABASES;
-USE inventory_db;
-SHOW TABLES;
+Designed and tested on MySQL 8.x.
 
-📝 **Notes**
-This schema can be extended with more tables (e.g., Payments, Categories).
-All tables use PRIMARY KEY, FOREIGN KEY, and constraints for data integrity.
+Schema follows 1NF, 2NF, and 3NF to eliminate redundancy.
+
+Can be extended with triggers, views, or stored procedures for advanced functionality.
+
+📜 License
+
+This project is for academic purposes. Feel free to use and adapt for learning.
 
 👤 **Author**
 Samuel Ojima Idakwo
